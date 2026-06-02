@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+
+<body onload="showConnectionStatus(); viewLoans();">
+
+<div class="navbar">
+<h1>eLoan System</h1>
+<div id="connection-status" style="margin-right: 20px;"></div>
+<div>
+<a href="dashboard.html">Dashboard</a>
+<a href="loan.html">Apply Loan</a>
+<a href="emi.html">EMI Calculator</a>
+<a href="index.html" onclick="logout()">Logout</a>
+</div>
+</div>
+
+<div class="page">
+
+<h2>Customer Dashboard</h2>
+
+<div class="dashboard">
+
+<div class="card">
+<h3>Apply for Loan</h3>
+<p>Submit a new loan request.</p>
+<a href="loan.html" class="btn">Apply Now</a>
+</div>
+
+<div class="card">
+<h3>View Loan Status</h3>
+<p>Check all your loan applications.</p>
+<button onclick="viewLoans()" class="btn">View Loans</button>
+</div>
+
+<div class="card">
+<h3>EMI Calculator</h3>
+<p>Estimate monthly repayments.</p>
+<a href="emi.html" class="btn">Calculate EMI</a>
+</div>
+
+</div>
+
+<h3>Your Loan Applications</h3>
+<div id="loans" style="margin-top: 20px;"></div>
+
+</div>
+
+<script src="src/loan.js"></script>
+
+<script>
+function logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+}
+</script>
+
+</body>
+</html>

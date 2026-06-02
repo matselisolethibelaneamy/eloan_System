@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Customer Registration</title>
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+
+<body>
+
+<div class="navbar">
+<h1>eLoan System</h1>
+<div>
+<a href="index.html">Home</a>
+<a href="login.html">Login</a>
+</div>
+</div>
+
+<div class="page">
+
+<div class="container">
+
+<h3>Customer Registration</h3>
+<p style="font-size: 12px; color: #666;">🔒 All registrations are monitored for suspicious activity</p>
+
+<input id="name" placeholder="Full Name">
+
+<input id="email" placeholder="Email">
+
+<input id="phone" placeholder="Phone Number">
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="register()">Register</button>
+
+<button onclick="history.back()" class="exit-btn">Exit</button>
+
+<div id="error-message" style="color: red; margin-top: 10px;"></div>
+
+</div>
+
+</div>
+
+<script src="src/register.js"></script>
+
+</body>
+</html>

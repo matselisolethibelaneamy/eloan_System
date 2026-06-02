@@ -1,0 +1,276 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    color:#333;
+}
+
+
+/* -------- NAVBAR -------- */
+
+.navbar{
+    background:#2c3e50;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.navbar h1{
+    color:white;
+    font-size:22px;
+}
+
+.navbar a{
+    color:white;
+    margin-left:15px;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:5px;
+    transition:0.3s;
+}
+
+.navbar a:hover{
+    background:#3498db;
+}
+
+
+/* -------- PAGE LAYOUT -------- */
+
+.page{
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#2c3e50;
+}
+
+
+/* -------- FORM CONTAINER -------- */
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    max-width:420px;
+    margin:auto;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.container h3{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+
+/* -------- INPUTS -------- */
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+input:focus, select:focus{
+    outline:none;
+    border-color:#3498db;
+}
+
+
+/* -------- BUTTONS -------- */
+
+button{
+    width:100%;
+    padding:12px;
+    background:#27ae60;
+    border:none;
+    color:white;
+    font-size:16px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1f8a4d;
+}
+
+
+/* -------- DASHBOARD -------- */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    transition:0.2s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#2c3e50;
+}
+
+.card a{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 14px;
+    background:#3498db;
+    color:white;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+
+/* -------- LOAN TABLE -------- */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    background:white;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+th, td{
+    padding:12px;
+    text-align:left;
+}
+
+th{
+    background:#3498db;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+
+/* -------- LOAN STATUS -------- */
+
+.status{
+    padding:4px 10px;
+    border-radius:4px;
+    font-size:13px;
+    color:white;
+}
+
+.pending{
+    background:#f39c12;
+}
+
+.approved{
+    background:#27ae60;
+}
+
+.rejected{
+    background:#e74c3c;
+}
+
+
+.exit-btn{
+    background:#e74c3c;
+    margin-top:10px;
+}
+
+.exit-btn:hover{
+    background:#c0392b;
+}
+
+/* Add to style.css */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+#connection-status {
+    font-size: 12px;
+    margin-right: 20px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+/* -------- RESPONSIVE -------- */
+
+@media (max-width:700px){
+
+.navbar{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.dashboard{
+    grid-template-columns:1fr;
+}
+
+.page{
+    padding:20px;
+}
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Apply Loan</title>
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+
+<body>
+
+<div class="navbar">
+<h1>eLoan System</h1>
+<div>
+<a href="dashboard.html">Dashboard</a>
+</div>
+</div>
+
+<div class="page">
+
+<div class="container">
+
+<h3>Loan Application</h3>
+<p style="font-size: 12px; color: #666;">🔒 All loan applications are monitored by SWAF</p>
+
+<select id="loan_type">
+<option value="Home Loan">Home Loan</option>
+<option value="Car Loan">Car Loan</option>
+<option value="Personal Loan">Personal Loan</option>
+</select>
+
+<input id="amount" placeholder="Loan Amount (KES)">
+
+<input id="duration" placeholder="Duration (Months)">
+
+<button onclick="applyLoan()">Submit Application</button>
+
+<button onclick="history.back()" class="exit-btn">Exit</button>
+
+<div id="message" style="margin-top: 10px;"></div>
+
+</div>
+
+</div>
+
+<script src="src/loan.js"></script>
+
+</body>
+</html>

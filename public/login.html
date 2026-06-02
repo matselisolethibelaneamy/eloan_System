@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+
+<body>
+
+<div class="navbar">
+<h1>eLoan System</h1>
+<div>
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+</div>
+</div>
+
+<div class="page">
+
+<div class="container">
+
+<h3>Customer Login</h3>
+<p style="font-size: 12px; color: #666;">⚠️ All login attempts are monitored by SWAF</p>
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<button onclick="history.back()" class="exit-btn">Exit</button>
+
+<div id="error-message" style="color: red; margin-top: 10px;"></div>
+<div id="debug-info" style="color: blue; margin-top: 10px; font-size: 12px;"></div>
+
+</div>
+
+</div>
+
+<script src="src/login.js"></script>
+
+</body>
+</html>

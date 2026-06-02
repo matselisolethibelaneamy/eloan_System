@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test SWAF Connection</title>
+    <script src="config.js"></script>
+</head>
+<body>
+    <h1>SWAF Connection Test</h1>
+    <div id="results"></div>
+    
+    <script>
+    async function testConnections() {
+        const results = document.getElementById('results');
+        const API_BASE = getAPIBaseURL();
+        
+        results.innerHTML = '<h3>Testing Connections...</h3>';
+        
+        // Test 1: Test SWAF
+        try {
+            const res = await fetch(`${API_BASE}/test`);
+            results.innerHTML += `<p>SWAF is reachable at ${API_BASE}</p>`;
+        } catch(e) {
+            results.innerHTML += `<p>Cannot reach SWAF at ${API_BASE}</p>`;
+        }
+        
+        // Test 2: Test Login POST (will appear in SWAF logs)
+        results.innerHTML += '<p>Testing Login POST request...</p>';
+        try {
+            const res = await fetch(`${API_BASE}/login`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: 'test', password: 'test'})
+            });
+            results.innerHTML += `<p>   Status: ${res.status} - This POST request should appear in SWAF logs</p>`;
+        } catch(e) {
+            results.innerHTML += `<p>   Error: ${e.message}</p>`;
+        }
+        
+        results.innerHTML += '<br><p>Check SWAF Dashboard at http://localhost:3000</p>';
+    }
+    
+    testConnections();
+    </script>
+</body>
+</html>

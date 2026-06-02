@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EMI Calculator</title>
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+
+<body>
+
+<div class="navbar">
+<h1>eLoan System</h1>
+<div>
+<a href="dashboard.html">Dashboard</a>
+</div>
+</div>
+
+<div class="page">
+
+<div class="container">
+
+<h3>EMI Calculator</h3>
+
+<input id="amount" placeholder="Loan Amount (KES)">
+
+<input id="rate" placeholder="Interest Rate (%)">
+
+<input id="months" placeholder="Loan Duration (Months)">
+
+<button onclick="calculateEMI()">Calculate EMI</button>
+
+<h3 id="emi"></h3>
+
+<button onclick="history.back()" class="exit-btn">Exit</button>
+
+</div>
+
+</div>
+
+<script src="src/emi.js"></script>
+
+</body>
+</html>
