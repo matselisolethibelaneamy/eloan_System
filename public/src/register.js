@@ -63,7 +63,7 @@ async function register() {
         
         // Display user-friendly error message
         if (error.message.includes("Failed to fetch")) {
-            errorDiv.innerText = "❌ Cannot connect to server. Make sure SWAF is running on port 5000";
+            errorDiv.innerText = "❌ Cannot connect to server. ";
         } else if (error.message.includes("timeout")) {
             errorDiv.innerText = "❌ Server timeout. Please try again.";
         } else {
