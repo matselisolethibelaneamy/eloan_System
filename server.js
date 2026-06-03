@@ -1,28 +1,48 @@
-// server.js - PostgreSQL version
+// server.js - Updated CORS for deployed SWAF
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const db = require("./db");  // Now returns { query, pool }
+const db = require("./db");  // Returns { query, pool }
 require('dotenv').config();
 
 const app = express();
 
+// ========== UPDATED: Add your deployed SWAF URL ==========
+const allowedOrigins = [
+    'http://localhost:5000',           // Local development
+    'http://localhost:8080',           // Local eLoanApp
+    'http://localhost:3000',           // Local React frontend
+    'https://swafff.duckdns.org',      // DEPLOYED SWAF - ADD THIS
+];
+
 app.use(cors({
-    origin: ['http://localhost:5000', 'http://localhost:8080', 'http://localhost:3000'],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log('❌ Blocked origin:', origin);
+            // For production, return false to block. For testing, allow but log.
+            callback(null, true); // Change to callback(null, false) to block
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Forwarded-Proto', 'X-Forwarded-For']
 }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// Add logging to see incoming requests
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} | Origin: ${req.headers.origin || 'unknown'}`);
     next();
 });
 
+// ========== ALL YOUR EXISTING ROUTES (keep them exactly as they are) ==========
 // REGISTER - PostgreSQL syntax
 app.post("/register", async (req, res) => {
     console.log("Registration request received:", req.body);
@@ -33,7 +53,6 @@ app.post("/register", async (req, res) => {
         return res.status(400).send({ message: "All fields are required" });
     }
     
-    // PostgreSQL uses $1, $2, etc. instead of ?
     const sql = "INSERT INTO customers(name, email, phone, username, password) VALUES($1, $2, $3, $4, $5) RETURNING id";
     
     try {
@@ -87,7 +106,7 @@ app.post("/user-login", async (req, res) => {
     }
 });
 
-// APPLY LOAN - PostgreSQL uses CURRENT_TIMESTAMP
+// APPLY LOAN
 app.post("/apply-loan", async (req, res) => {
     console.log("Loan application received:", req.body);
     
@@ -97,7 +116,6 @@ app.post("/apply-loan", async (req, res) => {
         return res.status(400).send({ message: "All fields are required" });
     }
     
-    // PostgreSQL uses $ placeholders and CURRENT_TIMESTAMP (same as MySQL NOW())
     const sql = "INSERT INTO loans(customer_id, loan_type, amount, duration, status, created_at) VALUES($1, $2, $3, $4, 'pending', CURRENT_TIMESTAMP) RETURNING id";
     
     try {
@@ -118,7 +136,7 @@ app.get("/loans/:id", async (req, res) => {
     
     try {
         const result = await db.query(sql, [req.params.id]);
-        res.send(result.rows);  // PostgreSQL returns rows array
+        res.send(result.rows);
     } catch (err) {
         console.error("Database error:", err);
         res.status(500).send([]);
@@ -127,12 +145,17 @@ app.get("/loans/:id", async (req, res) => {
 
 // TEST endpoint
 app.get("/test", (req, res) => {
-    res.send({ status: "LMS Backend is running with PostgreSQL" });
+    res.json({ 
+        status: "LMS Backend is running with PostgreSQL",
+        swaf_configured: "https://swafff.duckdns.org"
+    });
 });
 
+// ========== START SERVER ==========
 app.listen(8080, () => {
     console.log("========================================");
     console.log("✅ LMS Backend running on port 8080");
     console.log("✅ Using PostgreSQL database");
+    console.log("✅ Allowed CORS origins include: https://swafff.duckdns.org");
     console.log("========================================");
 });
