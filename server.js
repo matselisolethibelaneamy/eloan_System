@@ -9,9 +9,7 @@ const app = express();
 
 // ========== UPDATED: Add your deployed SWAF URL ==========
 const allowedOrigins = [
-    'http://localhost:5000',           // Local development
-    'http://localhost:8080',           // Local eLoanApp
-    'http://localhost:3000',           // Local React frontend
+    'https://eloan-system-api.onrender.com',
     'https://swafff.duckdns.org',      // DEPLOYED SWAF - ADD THIS
 ];
 
