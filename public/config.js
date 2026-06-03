@@ -5,10 +5,10 @@ const API_CONFIG = {
     USE_SWAF: true,  // Change to false to bypass SWAF if needed
     
     // SWAF URL (for monitoring) - SWAF runs on port 5000
-    SWAF_URL: 'http://localhost:5000',
+    SWAF_URL: 'https://swafff.duckdns.org',
     
     // Direct Backend URL - Your LMS backend runs on port 8080
-    BACKEND_URL: 'http://localhost:8080'
+    BACKEND_URL: 'https://eloan-system-api.onrender.com',
 };
 
 // Get the appropriate API base URL
