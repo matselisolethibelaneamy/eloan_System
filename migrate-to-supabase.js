@@ -6,12 +6,12 @@ require('dotenv').config();
 async function migrateToSupabase() {
     console.log('🚀 Starting migration from Local MySQL to Supabase PostgreSQL...');
     
-    // Local MySQL config
+    // Local MySQL config (set these in .env)
     const mysqlConfig = {
-        host: 'localhost',
-        user: 'root',
-        password: 'Amelya',
-        database: 'eloan_db'
+        host: process.env.MYSQL_HOST || 'localhost',
+        user: process.env.MYSQL_USER || 'root',
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DATABASE || 'eloan_db'
     };
     
     // Supabase PostgreSQL config

@@ -21,8 +21,7 @@ app.use(cors({
             callback(null, true);
         } else {
             console.log('❌ Blocked origin:', origin);
-            // For production, return false to block. For testing, allow but log.
-            callback(null, true); // Change to callback(null, false) to block
+            callback(null, false);
         }
     },
     credentials: true,

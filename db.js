@@ -2,12 +2,12 @@
 const { Pool } = require("pg");
 require('dotenv').config();
 
-// SSL configuration for Supabase
-const sslConfig = process.env.DB_SSL === 'true' ? {
+// Supabase always requires SSL
+const sslConfig = {
     ssl: {
-        rejectUnauthorized: false  // Required for Supabase
+        rejectUnauthorized: false
     }
-} : {};
+};
 
 // Create connection pool for Supabase
 const pool = new Pool({
