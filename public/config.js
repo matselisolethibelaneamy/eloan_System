@@ -70,17 +70,26 @@ function showConnectionStatus() {
     }
 }
 
-// Test connection to SWAF
+// Test connection to SWAF — shows block page immediately on page load if WAF blocked
 async function testConnection() {
     const API_BASE = getAPIBaseURL();
     console.log(`Testing connection to: ${API_BASE}`);
-    
+
     try {
         const response = await fetch(`${API_BASE}/test`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
-        
+
+        // WAF blocked — replace entire page with SWAF block HTML immediately
+        if (response.status === 403) {
+            const blockHtml = await response.text();
+            document.open();
+            document.write(blockHtml);
+            document.close();
+            return false;
+        }
+
         if (response.ok) {
             console.log(`✅ Connection to ${API_BASE} successful`);
             return true;
@@ -94,14 +103,12 @@ async function testConnection() {
     }
 }
 
-// Run connection test on page load
+// Run connection test immediately on page load
 console.log('Config loaded. SWAF Mode:', API_CONFIG.USE_SWAF ? 'Active' : 'Inactive');
 console.log('API Base URL:', getAPIBaseURL());
 
-// Test connection
 testConnection().then(connected => {
-    if (!connected) {
-        console.warn('⚠️ Cannot connect to API server. Make sure it is running!');
+    if (!connected && document.getElementById('connection-status')) {
         const statusDiv = document.getElementById('connection-status');
         if (statusDiv) {
             statusDiv.innerHTML = '<span style="color: red; font-size: 12px;">🔴 Cannot connect to server!</span>';
