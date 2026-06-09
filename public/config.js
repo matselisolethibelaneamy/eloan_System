@@ -103,15 +103,26 @@ async function testConnection() {
     }
 }
 
+// Hide page immediately — show only after connection check passes
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.style.visibility = 'hidden';
+});
+
 // Run connection test immediately on page load
 console.log('Config loaded. SWAF Mode:', API_CONFIG.USE_SWAF ? 'Active' : 'Inactive');
 console.log('API Base URL:', getAPIBaseURL());
 
 testConnection().then(connected => {
-    if (!connected && document.getElementById('connection-status')) {
+    if (connected) {
+        // Connection OK — reveal the page
+        document.body.style.visibility = 'visible';
+    } else if (document.getElementById('connection-status')) {
+        // Not blocked (503/timeout) but server issue — show page with error
+        document.body.style.visibility = 'visible';
         const statusDiv = document.getElementById('connection-status');
         if (statusDiv) {
             statusDiv.innerHTML = '<span style="color: red; font-size: 12px;">🔴 Cannot connect to server!</span>';
         }
     }
+    // If 403 (blocked), testConnection() already replaced the page — don't reveal
 });
